@@ -1475,10 +1475,10 @@ window.ms_init.view_billing_transactions = function init() {
             });
         }
 
-        sel_user.change(load_subscriptions);
-        sel_subscription.change(load_invoices);
-        sel_invoice.change(confirm_data);
-        btn_submit.click(save_link);
+        sel_user.on('change', load_subscriptions);
+        sel_subscription.on('change', load_invoices);
+        sel_invoice.on('change', confirm_data);
+        btn_submit.on('click', save_link);
 
         if (!isNaN(sel_user.val()) && sel_user.val() > 0) {
             load_subscriptions();
@@ -1502,11 +1502,11 @@ window.ms_init.view_billing_transactions = function init() {
         }
     };
 
-    btn_clear.click(clear_line);
-    btn_ignore.click(ignore_line);
-    btn_link.click(link_line);
-    btn_retry.click(retry_line);
-    btn_match.click(save_matching);
+    btn_clear.on('click', clear_line);
+    btn_ignore.on('click', ignore_line);
+    btn_link.on('click', link_line);
+    btn_retry.on('click', retry_line);
+    btn_match.on('click', save_matching);
 };
 
 /*global window:false */
@@ -2493,8 +2493,8 @@ window.ms_init.view_settings_automated_msg = function init() {
         }
     }
 
-    jQuery('#switch_comm_type').click(change_comm_type);
-    jQuery('input, select, textarea', '.ms-editor-form').change(make_dirty);
+    jQuery('#switch_comm_type').on('click', change_comm_type);
+    jQuery('input, select, textarea', '.ms-editor-form').on('change', make_dirty);
     jQuery('.override-slider')
         .each(function() { toggle_override.apply(this); })
         .on('ms-ajax-done', toggle_override);
@@ -2856,13 +2856,13 @@ window.ms_init.view_settings_import = function init() {
     }
 
     if (support_download()) {
-        btn_download.click(download_import_data);
+        btn_download.on('click', download_import_data);
     } else {
         btn_download.hide();
     }
 
-    btn_import.click(start_import);
-    btn_user_import.click(start_user_import);
+    btn_import.on('click', start_import);
+    btn_user_import.on('click', start_user_import);
 
     /**
      * Hide format on settings select

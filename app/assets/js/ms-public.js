@@ -188,7 +188,7 @@ window.ms_init.gateway_authorize = function init() {
     });
 
     if (profiles.is(':visible')) {
-        jQuery('input[name="profile"]').change(function() {
+        jQuery('input[name="profile"]').on('change', function() {
             if (jQuery(this).val() === '0') {
                 new_card.show();
                 profiles.find('.ms-row-card_cvc').hide();
@@ -201,7 +201,7 @@ window.ms_init.gateway_authorize = function init() {
             }
         });
 
-        jQuery('input[name="profile"]').first().change();
+        jQuery('input[name="profile"]').first().trigger('change');
     }
 
     jQuery('#ms-authorize-extra-form').validate(args);
