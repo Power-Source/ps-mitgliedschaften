@@ -8,6 +8,20 @@ class MS_Helper_ListTable_Event extends MS_Helper_ListTable {
 
 	protected $id = 'event';
 
+	/**
+	 * Factory ID for debugging.
+	 *
+	 * @var null
+	 */
+	public $_factory_id = null;
+
+	/**
+	 * Column headers for the list table.
+	 *
+	 * @var array
+	 */
+	protected $_column_headers = array();
+
 	public function __construct(){
 		parent::__construct(
 			array(

@@ -20,6 +20,20 @@ class MS_Helper_ListTable_CommunicationLog extends MS_Helper_ListTable {
 	protected $id = 'communicationlog';
 
 	/**
+	 * Factory ID for debugging.
+	 *
+	 * @var null
+	 */
+	public $_factory_id = null;
+
+	/**
+	 * Column headers for the list table.
+	 *
+	 * @var array
+	 */
+	protected $_column_headers = array();
+
+	/**
 	 * Constructor, defines general list table attributes.
 	 *
 	 * @since  1.0.2.7

@@ -13,7 +13,6 @@
  *
  * @package Membership2
  */
-#[\AllowDynamicProperties]
 class MS_Hooker {
 
 	/**

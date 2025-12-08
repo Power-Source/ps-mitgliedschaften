@@ -8,9 +8,19 @@ class MS_Helper_ListTable_Billing extends MS_Helper_ListTable {
 
 	protected $id = 'billing';
 
-	public $_factory_id;
+	/**
+	 * Factory ID for debugging.
+	 *
+	 * @var null
+	 */
+	public $_factory_id = null;
 
-	protected $_column_headers;
+	/**
+	 * Column headers for the list table.
+	 *
+	 * @var array
+	 */
+	protected $_column_headers = array();
 
 	public function __construct() {
 		parent::__construct(

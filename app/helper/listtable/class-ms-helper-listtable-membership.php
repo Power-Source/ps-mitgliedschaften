@@ -6,8 +6,19 @@
  */
 class MS_Helper_ListTable_Membership extends MS_Helper_ListTable {
 
-	public $_factory_id;
-	public $_column_headers;
+	/**
+	 * Factory ID for debugging.
+	 *
+	 * @var null
+	 */
+	public $_factory_id = null;
+
+	/**
+	 * Column headers for the list table.
+	 *
+	 * @var array
+	 */
+	public $_column_headers = array();
 
 	protected $id = 'membership';
 

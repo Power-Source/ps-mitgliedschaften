@@ -19,6 +19,20 @@ class MS_Helper_ListTable_TransactionMatching extends MS_Helper_ListTable {
 	protected $id = 'transaction_matching';
 
 	/**
+	 * Factory ID for debugging.
+	 *
+	 * @var null
+	 */
+	public $_factory_id = null;
+
+	/**
+	 * Column headers for the list table.
+	 *
+	 * @var array
+	 */
+	protected $_column_headers = array();
+
+	/**
 	 * Currently selected matching source;
 	 *
 	 * Supported types are

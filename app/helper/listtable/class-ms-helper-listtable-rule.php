@@ -14,6 +14,13 @@ class MS_Helper_ListTable_Rule extends MS_Helper_ListTable {
 	protected $id = 'rule';
 
 	/**
+	 * Factory ID for debugging.
+	 *
+	 * @var null
+	 */
+	public $_factory_id = null;
+
+	/**
 	 * Holds the human readable name of the rule tyle
 	 *
 	 * @since  1.0.0
@@ -47,6 +54,13 @@ class MS_Helper_ListTable_Rule extends MS_Helper_ListTable {
 	 * @since  1.0.0
 	 */
 	protected $prepared_args = array();
+
+	/**
+	 * Column headers for the list table.
+	 *
+	 * @var array
+	 */
+	protected $_column_headers = array();
 
 	/**
 	 * A list of all active memberships

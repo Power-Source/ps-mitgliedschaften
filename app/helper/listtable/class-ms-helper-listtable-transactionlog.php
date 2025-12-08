@@ -15,6 +15,20 @@ class MS_Helper_ListTable_TransactionLog extends MS_Helper_ListTable {
 	protected $id = 'transactionlog';
 
 	/**
+	 * Factory ID for debugging.
+	 *
+	 * @var null
+	 */
+	public $_factory_id = null;
+
+	/**
+	 * Column headers for the list table.
+	 *
+	 * @var array
+	 */
+	protected $_column_headers = array();
+
+	/**
 	 * Constructor, defines general list table attributes.
 	 *
 	 * @since  1.0.0
