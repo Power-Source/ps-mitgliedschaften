@@ -392,7 +392,16 @@ window.ms_functions = {
         var me = jQuery(el),
             dp = me.closest('.wpmui-datepicker-wrapper').find('.wpmui-datepicker');
 
-        dp.trigger('focus');
+        // Use native focus and showPicker API for modern browsers
+        if (dp.length) {
+            var inputEl = dp[0];
+            inputEl.focus();
+            
+            // Try showPicker() for modern browsers (Chrome 99+, Edge 99+, etc.)
+            if (typeof inputEl.showPicker === 'function') {
+                inputEl.showPicker();
+            }
+        }
     },
 
     /**
@@ -625,7 +634,11 @@ jQuery(document).ready(function() {
         .on(
             'click',
             '.wpmui-datepicker-wrapper .wpmui-icon',
-            function(ev) { fn.toggle_datepicker(this); }
+            function(ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                fn.toggle_datepicker(this);
+            }
         )
         // Initialize the tag-select components.
         .on(
