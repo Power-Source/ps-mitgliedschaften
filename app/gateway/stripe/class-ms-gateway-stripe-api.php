@@ -421,9 +421,10 @@ class MS_Gateway_Stripe_Api extends MS_Model_Option {
 		$all_items = MS_Factory::get_transient( 'ms_stripeplan_plans' );
 		$all_items = mslib3()->array->get( $all_items );
 
-		if ( ! isset( $all_items[ $item_id ] )
-		     || ! is_a( $all_items[ $item_id ], 'Stripe_Plan' )
-		) {
+		$cached_item = isset( $all_items[ $item_id ] ) ? $all_items[ $item_id ] : null;
+		$is_plan     = is_a( $cached_item, '\\Stripe\\Plan' ) || is_a( $cached_item, 'Stripe_Plan' );
+
+		if ( ! $is_plan ) {
 			try {
 				$item = \Stripe\Plan::retrieve( $item_id );
 			} catch ( Exception $e ) {
@@ -432,14 +433,14 @@ class MS_Gateway_Stripe_Api extends MS_Model_Option {
 			}
 			$all_items[ $item_id ] = $item;
 		} else {
-			$item = $all_items[ $item_id ];
+			$item = $cached_item;
 		}
 
 		/*
 		 * Stripe can only update the plan-name, so we have to delete and
 		 * recreate the plan manually.
 		 */
-		if ( $item && is_a( $item, 'Stripe_Plan' ) ) {
+		if ( $item && ( is_a( $item, '\\Stripe\\Plan' ) || is_a( $item, 'Stripe_Plan' ) ) ) {
 			$item->delete();
 			$all_items[ $item_id ] = false;
 		}
