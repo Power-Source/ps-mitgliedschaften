@@ -1782,16 +1782,22 @@ window.ms_init.bulk_delete_membership = function() {
                     var url = serealize_membership_ids();
                     // Sanitize and validate URL to prevent open redirects
                     if (url) {
+                        var safeUrl = null;
+                        
                         try {
                             // If it's a relative URL, use it directly
                             if (url.charAt(0) === '/') {
-                                window.location.assign(url);
+                                safeUrl = url;
                             } else {
                                 // For absolute URLs, validate same origin
                                 var urlObj = new URL(url, window.location.origin);
                                 if (urlObj.origin === window.location.origin) {
-                                    window.location.assign(urlObj.href);
+                                    safeUrl = urlObj.href;
                                 }
+                            }
+                            
+                            if (safeUrl) {
+                                window.location.href = safeUrl;
                             }
                         } catch (e) {
                             // Invalid URL, do nothing
@@ -2170,18 +2176,24 @@ window.ms_init.view_protected_content = function init() {
         // Sanitize and validate URL to prevent open redirects
         if (url) {
             sel_network_site.addClass('wpmui-loading');
+            var safeUrl = null;
+            
             try {
                 // If it's a relative URL, use it directly
                 if (url.charAt(0) === '/') {
-                    window.location.assign(url);
+                    safeUrl = url;
                 } else {
                     // For absolute URLs, validate same origin
                     var urlObj = new URL(url, window.location.origin);
                     if (urlObj.origin === window.location.origin) {
-                        window.location.assign(urlObj.href);
-                    } else {
-                        sel_network_site.removeClass('wpmui-loading');
+                        safeUrl = urlObj.href;
                     }
+                }
+                
+                if (safeUrl) {
+                    window.location.href = safeUrl;
+                } else {
+                    sel_network_site.removeClass('wpmui-loading');
                 }
             } catch (e) {
                 // Invalid URL, remove loading class

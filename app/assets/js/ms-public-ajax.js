@@ -110,19 +110,25 @@ jQuery(function() {
                     
                     // Sanitize and validate URL to prevent open redirects
                     if (targetUrl) {
+                        var safeUrl = null;
+                        
                         try {
                             // If it's a relative URL, use it directly
                             if (targetUrl.charAt(0) === '/') {
-                                document.location.assign(targetUrl);
+                                safeUrl = targetUrl;
                             } else {
                                 // For absolute URLs, validate same origin
                                 var urlObj = new URL(targetUrl, window.location.origin);
                                 if (urlObj.origin === window.location.origin) {
-                                    document.location.assign(urlObj.href);
-                                } else {
-                                    // Invalid URL, reload current page
-                                    document.location.reload();
+                                    safeUrl = urlObj.href;
                                 }
+                            }
+                            
+                            if (safeUrl) {
+                                document.location.href = safeUrl;
+                            } else {
+                                // Invalid URL, reload current page
+                                document.location.reload();
                             }
                         } catch (e) {
                             // Invalid URL, reload current page

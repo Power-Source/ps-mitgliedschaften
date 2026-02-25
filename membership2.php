@@ -20,10 +20,6 @@
  * Copyright notice
  *
  * @copyright PSOURCE (https://github.com/cp-psource/)
- *
- * Authors: DerN3rd
- * 
- *
  * @license http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
  *
  * This program is free software; you can redistribute it and/or modify
