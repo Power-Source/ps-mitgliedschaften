@@ -1599,11 +1599,11 @@ window.ms_init.view_member_editor = function init() {
                 if ('1' === response) {
                     field.removeClass('invalid');
                     field.addClass('valid');
-                    info.html('');
+                    info.text('');
                 } else {
                     field.removeClass('valid');
                     field.addClass('invalid');
-                    info.html(response);
+                    info.text(response);
                 }
 
                 validate_buttons();
@@ -1863,7 +1863,8 @@ window.ms_init.metabox = function init() {
 
     // Callback after the base protection setting was changed.
     window.ms_init.ms_metabox_event = function(event, data) {
-        jQuery('#ms-metabox-wrapper').replaceWith(data.response);
+        var safeResponse = DOMPurify.sanitize(data.response);
+        jQuery('#ms-metabox-wrapper').replaceWith(safeResponse);
         window.ms_init.metabox();
 
         jQuery('.wpmui-radio-slider').on("click", function() {

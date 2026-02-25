@@ -104,7 +104,7 @@ jQuery(function() {
     show_lost.on('click', function() {
         frm_login.hide();
         frm_lost.show();
-        jQuery('.ms-auth-header').html(ms_ajax.resetmessage);
+        jQuery('.ms-auth-header').text(ms_ajax.resetmessage);
         sts_lost.removeClass('error').text('');
         set_focus();
     });
@@ -112,7 +112,7 @@ jQuery(function() {
     show_login.on('click', function() {
         frm_lost.hide();
         frm_login.show();
-        jQuery('.ms-auth-header').html(ms_ajax.loginmessage);
+        jQuery('.ms-auth-header').text(ms_ajax.loginmessage);
         sts_login.removeClass('error').text('');
         set_focus();
     });
