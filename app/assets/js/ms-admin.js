@@ -2169,21 +2169,23 @@ window.ms_init.view_protected_content = function init() {
 
         // Sanitize and validate URL to prevent open redirects
         if (url) {
+            sel_network_site.addClass('wpmui-loading');
             try {
                 // If it's a relative URL, use it directly
                 if (url.charAt(0) === '/') {
                     window.location.assign(url);
-                    sel_network_site.addClass('wpmui-loading');
                 } else {
                     // For absolute URLs, validate same origin
                     var urlObj = new URL(url, window.location.origin);
                     if (urlObj.origin === window.location.origin) {
                         window.location.assign(urlObj.href);
-                        sel_network_site.addClass('wpmui-loading');
+                    } else {
+                        sel_network_site.removeClass('wpmui-loading');
                     }
                 }
             } catch (e) {
-                // Invalid URL, do nothing
+                // Invalid URL, remove loading class
+                sel_network_site.removeClass('wpmui-loading');
             }
         }
     }
