@@ -46,6 +46,50 @@ jQuery(function() {
 
 /* Global functions */
 
+/**
+ * Sanitizes and validates a redirect URL to prevent XSS and open redirect attacks.
+ * Only allows same-origin URLs or relative paths.
+ * @param {string} url - The URL to sanitize
+ * @returns {string|null} - Sanitized URL or null if invalid
+ */
+function sanitizeRedirectUrl(url) {
+    if (!url || typeof url !== 'string') {
+        return null;
+    }
+    
+    try {
+        // Handle relative URLs
+        if (url.charAt(0) === '/') {
+            var parsed = new URL(url, window.location.origin);
+            // Only allow http/https protocols
+            if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+                return null;
+            }
+            // Return only safe path components
+            return parsed.pathname + parsed.search + parsed.hash;
+        }
+        
+        // Handle absolute URLs
+        var urlObj = new URL(url);
+        
+        // Only allow http/https protocols
+        if (urlObj.protocol !== 'http:' && urlObj.protocol !== 'https:') {
+            return null;
+        }
+        
+        // Only allow same origin
+        if (urlObj.origin !== window.location.origin) {
+            return null;
+        }
+        
+        // Return only safe path components
+        return urlObj.pathname + urlObj.search + urlObj.hash;
+    } catch (e) {
+        // Invalid URL
+        return null;
+    }
+}
+
 window.ms_functions = {
     dp_config: {
         dateFormat: 'yy-mm-dd', //TODO get wp configured date format
@@ -1780,30 +1824,10 @@ window.ms_init.bulk_delete_membership = function() {
             callback: function(key) {
                 if (key === 0) {
                     var url = serealize_membership_ids();
-                    // Sanitize and validate URL to prevent open redirects
-                    if (url) {
-                        var safeUrl = null;
-                        
-                        try {
-                            // If it's a relative URL, validate and use safe components
-                            if (url.charAt(0) === '/') {
-                                // Ensure it's a valid path by parsing it
-                                var testUrl = new URL(url, window.location.origin);
-                                safeUrl = testUrl.pathname + testUrl.search + testUrl.hash;
-                            } else {
-                                // For absolute URLs, validate same origin and reconstruct from safe components
-                                var urlObj = new URL(url);
-                                if (urlObj.origin === window.location.origin) {
-                                    safeUrl = urlObj.pathname + urlObj.search + urlObj.hash;
-                                }
-                            }
-                            
-                            if (safeUrl) {
-                                window.location.href = safeUrl;
-                            }
-                        } catch (e) {
-                            // Invalid URL, do nothing
-                        }
+                    var safeUrl = sanitizeRedirectUrl(url);
+                    
+                    if (safeUrl) {
+                        window.location.href = safeUrl;
                     }
                 }
             }
@@ -2174,35 +2198,11 @@ window.ms_init.view_protected_content = function init() {
     // Network-wide protection
     function refresh_site_data(ev) {
         var url = sel_network_site.val();
-
-        // Sanitize and validate URL to prevent open redirects
-        if (url) {
+        var safeUrl = sanitizeRedirectUrl(url);
+        
+        if (safeUrl) {
             sel_network_site.addClass('wpmui-loading');
-            var safeUrl = null;
-            
-            try {
-                // If it's a relative URL, use it directly
-                if (url.charAt(0) === '/') {
-                    // Ensure it's a valid path by parsing it
-                    var testUrl = new URL(url, window.location.origin);
-                    safeUrl = testUrl.pathname + testUrl.search + testUrl.hash;
-                } else {
-                    // For absolute URLs, validate same origin and reconstruct from safe components
-                    var urlObj = new URL(url);
-                    if (urlObj.origin === window.location.origin) {
-                        safeUrl = urlObj.pathname + urlObj.search + urlObj.hash;
-                    }
-                }
-                
-                if (safeUrl) {
-                    window.location.href = safeUrl;
-                } else {
-                    sel_network_site.removeClass('wpmui-loading');
-                }
-            } catch (e) {
-                // Invalid URL, remove loading class
-                sel_network_site.removeClass('wpmui-loading');
-            }
+            window.location.href = safeUrl;
         }
     }
 

@@ -5,6 +5,50 @@
 /*global document:false */
 /*global ms_data:false */
 
+/**
+ * Sanitizes and validates a redirect URL to prevent XSS and open redirect attacks.
+ * Only allows same-origin URLs or relative paths.
+ * @param {string} url - The URL to sanitize
+ * @returns {string|null} - Sanitized URL or null if invalid
+ */
+function sanitizeRedirectUrl(url) {
+    if (!url || typeof url !== 'string') {
+        return null;
+    }
+    
+    try {
+        // Handle relative URLs
+        if (url.charAt(0) === '/') {
+            var parsed = new URL(url, window.location.origin);
+            // Only allow http/https protocols
+            if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+                return null;
+            }
+            // Return only safe path components
+            return parsed.pathname + parsed.search + parsed.hash;
+        }
+        
+        // Handle absolute URLs
+        var urlObj = new URL(url);
+        
+        // Only allow http/https protocols
+        if (urlObj.protocol !== 'http:' && urlObj.protocol !== 'https:') {
+            return null;
+        }
+        
+        // Only allow same origin
+        if (urlObj.origin !== window.location.origin) {
+            return null;
+        }
+        
+        // Return only safe path components
+        return urlObj.pathname + urlObj.search + urlObj.hash;
+    } catch (e) {
+        // Invalid URL
+        return null;
+    }
+}
+
 jQuery(function() {
     var ms_ajax = window.ms_ajax_login,
         frm_login = jQuery('form[action="login"]'),
@@ -108,34 +152,13 @@ jQuery(function() {
                         targetUrl = redirect.val();
                     }
                     
-                    // Sanitize and validate URL to prevent open redirects
-                    if (targetUrl) {
-                        var safeUrl = null;
-                        
-                        try {
-                            // If it's a relative URL, validate and use safe components
-                            if (targetUrl.charAt(0) === '/') {
-                                // Ensure it's a valid path by parsing it
-                                var testUrl = new URL(targetUrl, window.location.origin);
-                                safeUrl = testUrl.pathname + testUrl.search + testUrl.hash;
-                            } else {
-                                // For absolute URLs, validate same origin and reconstruct from safe components
-                                var urlObj = new URL(targetUrl);
-                                if (urlObj.origin === window.location.origin) {
-                                    safeUrl = urlObj.pathname + urlObj.search + urlObj.hash;
-                                }
-                            }
-                            
-                            if (safeUrl) {
-                                document.location.href = safeUrl;
-                            } else {
-                                // Invalid URL, reload current page
-                                document.location.reload();
-                            }
-                        } catch (e) {
-                            // Invalid URL, reload current page
-                            document.location.reload();
-                        }
+                    var safeUrl = sanitizeRedirectUrl(targetUrl);
+                    
+                    if (safeUrl) {
+                        document.location.href = safeUrl;
+                    } else {
+                        // Invalid URL, reload current page
+                        document.location.reload();
                     }
                 }
             },
