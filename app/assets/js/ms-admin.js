@@ -1090,7 +1090,7 @@ window.ms_init.controller_adminbar = function init() {
             .removeClass('hover')
             .find('> div')
             .filter(':first-child')
-            .html(ms_data.switching_text);
+            .text(ms_data.switching_text);
     });
 
     jQuery('.ms-date').ms_datepicker();
@@ -1986,7 +1986,9 @@ window.ms_init.view_membership_urlgroup = function init() {
             });
 
             if (!container.find('> div').length) {
-                container.html('<div><i>' + ms_data.empty_msg + '</i></div>');
+                var emptyDiv = jQuery('<div><i></i></div>');
+                emptyDiv.find('i').text(ms_data.empty_msg);
+                container.append(emptyDiv);
             }
 
             container.show();
@@ -2963,7 +2965,7 @@ window.ms_init.view_settings_media = function init() {
             var newRule = "location ~* ^" + $wp_content + "/.*\\.(" + $extensions + ")$ {" +
                 " \n  allow all;" +
                 "\n}";
-            jQuery('.application-servers-nginx-extra-instructions').html(escapeHtml(newRule));
+            jQuery('.application-servers-nginx-extra-instructions').text(newRule);
         }
     });
   
