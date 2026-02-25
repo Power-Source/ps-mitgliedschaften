@@ -1785,14 +1785,16 @@ window.ms_init.bulk_delete_membership = function() {
                         var safeUrl = null;
                         
                         try {
-                            // If it's a relative URL, use it directly
+                            // If it's a relative URL, validate and use safe components
                             if (url.charAt(0) === '/') {
-                                safeUrl = url;
+                                // Ensure it's a valid path by parsing it
+                                var testUrl = new URL(url, window.location.origin);
+                                safeUrl = testUrl.pathname + testUrl.search + testUrl.hash;
                             } else {
-                                // For absolute URLs, validate same origin
-                                var urlObj = new URL(url, window.location.origin);
+                                // For absolute URLs, validate same origin and reconstruct from safe components
+                                var urlObj = new URL(url);
                                 if (urlObj.origin === window.location.origin) {
-                                    safeUrl = urlObj.href;
+                                    safeUrl = urlObj.pathname + urlObj.search + urlObj.hash;
                                 }
                             }
                             
@@ -2181,12 +2183,14 @@ window.ms_init.view_protected_content = function init() {
             try {
                 // If it's a relative URL, use it directly
                 if (url.charAt(0) === '/') {
-                    safeUrl = url;
+                    // Ensure it's a valid path by parsing it
+                    var testUrl = new URL(url, window.location.origin);
+                    safeUrl = testUrl.pathname + testUrl.search + testUrl.hash;
                 } else {
-                    // For absolute URLs, validate same origin
-                    var urlObj = new URL(url, window.location.origin);
+                    // For absolute URLs, validate same origin and reconstruct from safe components
+                    var urlObj = new URL(url);
                     if (urlObj.origin === window.location.origin) {
-                        safeUrl = urlObj.href;
+                        safeUrl = urlObj.pathname + urlObj.search + urlObj.hash;
                     }
                 }
                 
