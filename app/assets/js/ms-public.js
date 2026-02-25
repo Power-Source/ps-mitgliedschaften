@@ -94,7 +94,11 @@ window.ms_init.frontend_register = function init() {
                 if ($('#display_username_option').length) {
                     $('#display_username_option').attr('value', username).text(username);
                 } else {
-                    $('#display_name').append('<option id="display_username_option" value="' + username + '">' + username + '</option>');
+                    var option = $('<option></option>')
+                        .attr('id', 'display_username_option')
+                        .attr('value', username)
+                        .text(username);
+                    $('#display_name').append(option);
                 }
             }
         });

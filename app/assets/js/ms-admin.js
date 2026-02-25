@@ -1780,9 +1780,22 @@ window.ms_init.bulk_delete_membership = function() {
             callback: function(key) {
                 if (key === 0) {
                     var url = serealize_membership_ids();
-                    // Validate URL is relative or same origin
-                    if (url && (url.indexOf('/') === 0 || url.indexOf(window.location.origin) === 0)) {
-                        window.location = url;
+                    // Sanitize and validate URL to prevent open redirects
+                    if (url) {
+                        try {
+                            // If it's a relative URL, use it directly
+                            if (url.charAt(0) === '/') {
+                                window.location.assign(url);
+                            } else {
+                                // For absolute URLs, validate same origin
+                                var urlObj = new URL(url, window.location.origin);
+                                if (urlObj.origin === window.location.origin) {
+                                    window.location.assign(urlObj.href);
+                                }
+                            }
+                        } catch (e) {
+                            // Invalid URL, do nothing
+                        }
                     }
                 }
             }
@@ -2154,10 +2167,24 @@ window.ms_init.view_protected_content = function init() {
     function refresh_site_data(ev) {
         var url = sel_network_site.val();
 
-        // Validate URL is relative or same origin before redirect
-        if (url && (url.indexOf('/') === 0 || url.indexOf(window.location.origin) === 0)) {
-            window.location.href = url;
-            sel_network_site.addClass('wpmui-loading');
+        // Sanitize and validate URL to prevent open redirects
+        if (url) {
+            try {
+                // If it's a relative URL, use it directly
+                if (url.charAt(0) === '/') {
+                    window.location.assign(url);
+                    sel_network_site.addClass('wpmui-loading');
+                } else {
+                    // For absolute URLs, validate same origin
+                    var urlObj = new URL(url, window.location.origin);
+                    if (urlObj.origin === window.location.origin) {
+                        window.location.assign(urlObj.href);
+                        sel_network_site.addClass('wpmui-loading');
+                    }
+                }
+            } catch (e) {
+                // Invalid URL, do nothing
+            }
         }
     }
 
