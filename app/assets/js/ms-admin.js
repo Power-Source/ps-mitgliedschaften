@@ -1541,7 +1541,7 @@ window.ms_init.view_billing_transactions = function init() {
             container.append(
                 jQuery('<option></option>')
                 .val(val)
-                .html(label)
+                .text(label)
             );
         }
     };
