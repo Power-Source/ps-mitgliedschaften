@@ -108,7 +108,11 @@ window.ms_init.frontend_register = function init() {
                     if ($('#display_first_name_option').length) {
                         $('#display_first_name_option').attr('value', first_name).text(first_name);
                     } else {
-                        $('#display_name').append('<option id="display_first_name_option" value="' + first_name + '">' + first_name + '</option>');
+                        var option = $('<option></option>')
+                            .attr('id', 'display_first_name_option')
+                            .attr('value', first_name)
+                            .text(first_name);
+                        $('#display_name').append(option);
                     }
                 }
                 first_last_name();
@@ -124,7 +128,11 @@ window.ms_init.frontend_register = function init() {
                     if ($('#display_last_name_option').length) {
                         $('#display_last_name_option').attr('value', last_name).text(last_name);
                     } else {
-                        $('#display_name').append('<option id="display_last_name_option" value="' + last_name + '">' + last_name + '</option>');
+                        var option = $('<option></option>')
+                            .attr('id', 'display_last_name_option')
+                            .attr('value', last_name)
+                            .text(last_name);
+                        $('#display_name').append(option);
                     }
                 }
                 first_last_name();
@@ -143,8 +151,16 @@ window.ms_init.frontend_register = function init() {
             var name = fname + ' ' + lname,
                 rname = lname + ' ' + fname;
 
-            $('#display_name').append('<option id="display_first_last_option" value="' + name + '">' + name + '</option>');
-            $('#display_name').append('<option id="display_first_last_option" value="' + rname + '">' + rname + '</option>');
+        var option1 = $('<option></option>')
+            .attr('id', 'display_first_last_option')
+            .attr('value', name)
+            .text(name);
+        var option2 = $('<option></option>')
+            .attr('id', 'display_first_last_option')
+            .attr('value', rname)
+            .text(rname);
+        $('#display_name').append(option1);
+        $('#display_name').append(option2);
         };
 
     }

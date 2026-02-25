@@ -101,10 +101,19 @@ jQuery(function() {
                 show_message(sts_login, data);
 
                 if (data.loggedin) {
+                    var targetUrl;
                     if (undefined !== data.redirect && data.redirect.length > 5) {
-                        document.location.href = data.redirect;
+                        targetUrl = data.redirect;
                     } else {
-                        document.location.href = redirect.val();
+                        targetUrl = redirect.val();
+                    }
+                    
+                    // Validate URL is relative or same origin before redirect
+                    if (targetUrl && (targetUrl.indexOf('/') === 0 || targetUrl.indexOf(window.location.origin) === 0)) {
+                        document.location.href = targetUrl;
+                    } else {
+                        // Fallback to current page if URL is invalid
+                        document.location.reload();
                     }
                 }
             },

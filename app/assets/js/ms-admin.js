@@ -1779,7 +1779,11 @@ window.ms_init.bulk_delete_membership = function() {
             ],
             callback: function(key) {
                 if (key === 0) {
-                    window.location = serealize_membership_ids();
+                    var url = serealize_membership_ids();
+                    // Validate URL is relative or same origin
+                    if (url && (url.indexOf('/') === 0 || url.indexOf(window.location.origin) === 0)) {
+                        window.location = url;
+                    }
                 }
             }
         };
@@ -1982,14 +1986,14 @@ window.ms_init.view_membership_payment = function init() {
                 currency = '$';
                 break;
             case 'EUR':
-                currency = '&euro;';
+                currency = '€';
                 break;
             case 'JPY':
-                currency = '&yen;';
+                currency = '¥';
                 break;
         }
 
-        items.find('.wpmui-label-before').html(currency);
+        items.find('.wpmui-label-before').text(currency);
     }
 
     function toggle_trial(ev, data, is_err) {
@@ -2150,8 +2154,11 @@ window.ms_init.view_protected_content = function init() {
     function refresh_site_data(ev) {
         var url = sel_network_site.val();
 
-        window.location.href = url;
-        sel_network_site.addClass('wpmui-loading');
+        // Validate URL is relative or same origin before redirect
+        if (url && (url.indexOf('/') === 0 || url.indexOf(window.location.origin) === 0)) {
+            window.location.href = url;
+            sel_network_site.addClass('wpmui-loading');
+        }
     }
 
     // Add event hooks.
