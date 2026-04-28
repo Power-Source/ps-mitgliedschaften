@@ -28,11 +28,12 @@ PS Mitgliederschaften ist das benutzerfreundlichste Mitgliedschafts-Plugin für 
 Du kannst uns gerne Deine optimierten .po/.mo Dateien für Deine Muttersprache zukommen lassen. 
 Nutze die Möglichkeit dazu auf GitHub oder sende Deine Dateien an: webmaster@n3rds.work
 
-You are welcome to send us your optimized .po/.mo files for your native language. 
-Use the opportunity to do so on GitHub or send your files to: webmaster@n3rds.work
-
-
 == ChangeLog ==
+
+= 1.0.2 =
+
+* Fix: Konflikt im Registrierungsformular behoben, der in Kombination mit externen register_form-Hooks zu doppelten Passwortfeldern fuehren konnte.
+* Fix: reCaptcha-Validierung im Registrierungsablauf stabilisiert und Integrationsverhalten zwischen reCaptcha-Add-ons verbessert.
 
 = 1.0.1 =
 
