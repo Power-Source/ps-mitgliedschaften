@@ -2,15 +2,13 @@
 Contributors: PSOURCE
 Tags: classicpress-plugin, classicpress, membership, multisite
 Requires at least: 4.9
-Tested up to: WordPress 6.8.1, ClassicPress 2.6.0
-Stable tag: 1.0.1
+Tested up to: WordPress 6.8.1, ClassicPress 2.7.0
+Stable tag: 1.0.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Das leistungsstärkste, benutzerfreundlichste und flexibelste Mitgliedschafts-Plugin für ClassicPress-Seiten.
-
-The most powerful, easy-to-use, and flexible membership plugin for ClassicPress sites.
 
 == Description ==
 
@@ -24,7 +22,6 @@ PS Mitgliederschaften ist der Nachfolger unseres äußerst beliebten Membership-
 
 PS Mitgliederschaften ist das benutzerfreundlichste Mitgliedschafts-Plugin für ClassicPress Multisite.
 
-
 Du kannst uns gerne Deine optimierten .po/.mo Dateien für Deine Muttersprache zukommen lassen. 
 Nutze die Möglichkeit dazu auf GitHub oder sende Deine Dateien an: webmaster@n3rds.work
 
@@ -34,6 +31,7 @@ Nutze die Möglichkeit dazu auf GitHub oder sende Deine Dateien an: webmaster@n3
 
 * Fix: Konflikt im Registrierungsformular behoben, der in Kombination mit externen register_form-Hooks zu doppelten Passwortfeldern fuehren konnte.
 * Fix: reCaptcha-Validierung im Registrierungsablauf stabilisiert und Integrationsverhalten zwischen reCaptcha-Add-ons verbessert.
+* Fix: Pointer-Polyfill hinzugefügt und die Skripte und Stile für verbesserte Benutzerführung aktualisiert
 
 = 1.0.1 =
 

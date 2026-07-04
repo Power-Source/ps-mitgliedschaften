@@ -1392,10 +1392,10 @@ class MS_Controller_Plugin extends MS_Controller {
 			return;
 		}
 
-		wp_enqueue_script( 'wp-pointer' );
+		wp_enqueue_script( 'psmembership-app-pointer-polyfill', plugins_url( 'pointer-polyfill.js', __FILE__ ), array( 'jquery' ), '1.0.0', true );
 
 		// Enqueue pointers css
-		wp_enqueue_style( 'wp-pointer' );
+		wp_enqueue_style( 'psmembership-app-pointer-polyfill', plugins_url( 'pointer-polyfill.css', __FILE__ ), array(), '1.0.0' );
 
 		// Enqueue ms-admin-pointers.js
 		wp_enqueue_script( 'ms-admin-pointers' );

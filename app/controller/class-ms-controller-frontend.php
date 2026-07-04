@@ -1082,9 +1082,18 @@ class MS_Controller_Frontend extends MS_Controller {
 	 * @return string The redirect url.
 	 */
 	public function login_redirect( $redirect_to, $request, $user ) {
+		if ( ! empty( $request ) ) {
+			return $redirect_to;
+		}
+
+		$normalized_redirect = untrailingslashit( set_url_scheme( $redirect_to, 'https' ) );
+		$default_admin       = untrailingslashit( set_url_scheme( admin_url(), 'https' ) );
+		$default_profile     = untrailingslashit( set_url_scheme( admin_url( 'profile.php' ), 'https' ) );
+		$default_home        = untrailingslashit( set_url_scheme( home_url( '/' ), 'https' ) );
+
 		if ( ! empty( $user->ID )
 			&& ! MS_Model_Member::is_admin_user( $user->ID )
-			&& ( empty( $redirect_to ) || admin_url() == $redirect_to )
+			&& ( empty( $redirect_to ) || $normalized_redirect === $default_admin || $normalized_redirect === $default_profile || $normalized_redirect === $default_home )
 		) {
 			$redirect_to = MS_Model_Pages::get_page_url( MS_Model_Pages::MS_PAGE_ACCOUNT );
 		}
@@ -1106,7 +1115,11 @@ class MS_Controller_Frontend extends MS_Controller {
 	 * @return void
 	 */
 	public function logout_redirect() {
-		wp_redirect( MS_Model_Pages::get_url_after_logout() );
+		if ( ! empty( $_REQUEST['redirect_to'] ) ) {
+			return;
+		}
+
+		wp_safe_redirect( MS_Model_Pages::get_url_after_logout() );
 		exit;
 	}
 
