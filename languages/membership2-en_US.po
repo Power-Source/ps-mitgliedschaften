@@ -49,7 +49,7 @@ msgstr ""
 #: app/addon/wprest/class-ms-addon-wprest.php:72
 #, fuzzy
 msgid "Pro Version"
-msgstr "Per version"
+msgstr "Pro version"
 
 #: app/addon/bbpress/class-ms-addon-bbpress.php:61
 #: app/addon/bbpress/rule/class-ms-addon-bbpress-rule-view.php:15

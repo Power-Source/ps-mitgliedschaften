@@ -9,40 +9,30 @@
  * Sanitizes and validates a redirect URL to prevent XSS and open redirect attacks.
  * Only allows same-origin URLs or relative paths.
  * @param {string} url - The URL to sanitize
- * @returns {string|null} - Sanitized URL or null if invalid
+ * @returns {string|null} - Absolute same-origin URL or null if invalid
  */
 function sanitizeRedirectUrl(url) {
     if (!url || typeof url !== 'string') {
         return null;
     }
-    
+
     try {
-        // Handle relative URLs
-        if (url.charAt(0) === '/') {
-            var parsed = new URL(url, window.location.origin);
-            // Only allow http/https protocols
-            if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
-                return null;
-            }
-            // Return only safe path components
-            return parsed.pathname + parsed.search + parsed.hash;
-        }
-        
-        // Handle absolute URLs
-        var urlObj = new URL(url);
-        
+        var urlObj = url.charAt(0) === '/'
+            ? new URL(url, window.location.origin)
+            : new URL(url);
+
         // Only allow http/https protocols
         if (urlObj.protocol !== 'http:' && urlObj.protocol !== 'https:') {
             return null;
         }
-        
+
         // Only allow same origin
         if (urlObj.origin !== window.location.origin) {
             return null;
         }
-        
-        // Return only safe path components
-        return urlObj.pathname + urlObj.search + urlObj.hash;
+
+        // Keep the origin so a pathname starting with // cannot become a new host.
+        return urlObj.href;
     } catch (e) {
         // Invalid URL
         return null;
@@ -146,14 +136,14 @@ jQuery(function() {
 
                 if (data.loggedin) {
                     var targetUrl;
-                    if (undefined !== data.redirect && data.redirect.length > 5) {
+                    if (typeof data.redirect === 'string' && data.redirect.length > 5) {
                         targetUrl = data.redirect;
                     } else {
                         targetUrl = redirect.val();
                     }
-                    
+
                     var safeUrl = sanitizeRedirectUrl(targetUrl);
-                    
+
                     if (safeUrl) {
                         document.location.href = safeUrl;
                     } else {

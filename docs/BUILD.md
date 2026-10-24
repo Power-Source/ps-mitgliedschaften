@@ -13,6 +13,11 @@ npm install
 ## Commands
 - `npm run build` – Minifies JS/CSS into the existing target files.
 - `npm run dev` – Watches JS/CSS and writes non-minified output with sourcemaps for easier debugging.
+- `npm test` – Tests login, admin bulk-deletion, and network-site-selection redirects in both source and minified assets. Rebuild the assets after source changes before running these tests.
+
+Login redirects accept HTTP(S) URLs on the current origin and root-relative paths. The validator returns an absolute URL, preserving query strings and fragments without allowing a path beginning with `//` to become an external destination. Invalid redirects retain the existing page-reload fallback.
+
+Admin bulk-deletion and network-site-selection redirects use the same validation rules. Invalid admin redirects do not navigate, and rejected site selections do not activate the loading state.
 
 ## Release/Distribution (ohne Dev-Kram)
 Aus dem Plugin-Root ein schlankes Zip bauen, das Doku/Build-Tooling auslässt:
