@@ -10,7 +10,7 @@ class MS_Gateway_Manual_View_Settings extends MS_View {
 			'Weise Deine Benutzer an, wie sie mit manuellen Zahlungen fortfahren sollen. Dies kann beispielsweise Deine Bankkontonummer und eine E-Mail-Adresse umfassen, an die die Zahlungsbestätigung gesendet werden soll.',
 			'membership2'
 		) . '<br />&nbsp;<br /><em>' . __(
-			'Bei Verwendung dieser Zahlungsmethode werden dem Benutzer die folgenden Zahlungsanweisungen angezeigt. Da die Zahlung nicht automatisch bestätigt werden kann, wird seine Mitgliedschaft <b> nicht </ b> sofort aktiviert! Du musst manuell prüfen, ob die Zahlung getätigt wurde, und die Mitgliederrechnung auf "bezahlt" setzen, um die Zahlung abzuschließen.',
+			'Bei Verwendung dieser Zahlungsmethode werden dem Benutzer die folgenden Zahlungsanweisungen angezeigt. Da die Zahlung nicht automatisch bestätigt werden kann, wird seine Mitgliedschaft <b>nicht</b> sofort aktiviert! Du musst manuell prüfen, ob die Zahlung getätigt wurde, und die Mitgliederrechnung auf "bezahlt" setzen, um die Zahlung abzuschließen.',
 			'membership2'
 		) .
 		'</em>';

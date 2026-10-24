@@ -1687,7 +1687,7 @@ class MS_View_Help extends MS_View {
         </p>
 		<p>
 			<strong><?php _ex( 'E-Mails stoppen', 'help', 'membership2' ); ?></strong><br />
-			<?php _ex( 'In der wp-config.php die Zeile <code>define( "MS_STOP_EMAILS", true );</code> hinzufügen um geschützten Inhalt zu zwingen, <em>keine</me> Emails an Mitglieder zu senden. Dies kann beim Testen verwendet werden, um zu verhindern, dass Deine Benutzer Email-Benachrichtigungen erhalten.', 'help', 'membership2' ); ?>
+			<?php _ex( 'In der wp-config.php die Zeile <code>define( "MS_STOP_EMAILS", true );</code> hinzufügen um geschützten Inhalt zu zwingen, <em>keine</em> Emails an Mitglieder zu senden. Dies kann beim Testen verwendet werden, um zu verhindern, dass Deine Benutzer Email-Benachrichtigungen erhalten.', 'help', 'membership2' ); ?>
 		</p>
 		<p>
 			<strong><?php _ex( 'Emails reduzieren', 'help', 'membership2' ); ?></strong><br />

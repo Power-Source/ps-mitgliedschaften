@@ -47,3 +47,25 @@ Outputs
 
 ## Vendor files
 Files like `app/assets/js/jquery.m2.plugins.min.js` remain vendored and are **not** rebuilt. If we later add their sources, include them as new entrypoints in `scripts/build.js`.
+
+## English translations
+
+The source strings are predominantly German. Both `en_US` and `en_GB` therefore need complete PO catalogs and compiled MO files; an empty English translation falls back to the German source.
+
+Use WP-CLI's i18n commands (no running database required) to refresh the template and update only the English catalogs:
+
+```bash
+wp i18n make-pot . languages/membership2.pot --domain=membership2 --include=membership2.php,app,premium --package-name='PS Mitgliedschaften'
+wp i18n update-po languages/membership2.pot languages/membership2-en_US.po
+wp i18n update-po languages/membership2.pot languages/membership2-en_GB.po
+```
+
+Review new, changed and `fuzzy` entries before compiling. Remove `fuzzy` only after checking the translation, including both plural forms. Preserve printf placeholders, HTML attributes, URLs and shortcode tokens. British spelling belongs in visible prose, not technical identifiers or gateway names.
+
+```bash
+wp i18n make-mo languages/membership2-en_US.po
+wp i18n make-mo languages/membership2-en_GB.po
+php scripts/check-translations.php
+```
+
+The checker uses the WordPress/ClassicPress POMO classes from the enclosing installation, without bootstrapping WordPress or accessing its database. For a standalone checkout, pass an installation path: `php scripts/check-translations.php /path/to/wordpress`. It checks template coverage, locale and plural headers, empty/fuzzy entries, placeholder and markup preservation, exact PO/MO agreement, and runtime singular/plural lookups.

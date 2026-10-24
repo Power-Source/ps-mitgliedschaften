@@ -2,9 +2,10 @@
 Contributors: PSOURCE
 Tags: classicpress-plugin, classicpress, membership, multisite
 Requires at least: 4.9
-Tested up to: WordPress 6.8.1, ClassicPress 2.7.0
+Tested up to: 7.1 
+ClassicPress 2.7.4
 Stable tag: 1.0.2
-Requires PHP: 7.0
+Requires PHP: 8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +27,14 @@ Du kannst uns gerne Deine optimierten .po/.mo Dateien für Deine Muttersprache z
 Nutze die Möglichkeit dazu auf GitHub oder sende Deine Dateien an: webmaster@n3rds.work
 
 == ChangeLog ==
+
+= 1.0.3 =
+
+* Sicherheit: Weiterleitungsvalidierung beim Ajax-Login, beim Löschen mehrerer Mitgliedschaften und bei der Netzwerkauswahl korrigiert. Nur HTTP(S)-Ziele derselben Herkunft werden zugelassen; Pfade mit doppeltem Schrägstrich können keine externe Weiterleitung mehr auslösen.
+* Tests: Regressionstests für gültige und ungültige Weiterleitungen in Quell- und minimierten Skripten ergänzt.
+* Übersetzungen: Englische Sprachkataloge (USA und Großbritannien) mit dem aktuellen Quellcode abgeglichen, Übersetzungen geprüft und ergänzt sowie die kompilierten Sprachdateien aktualisiert.
+* Fix: Fehlerhafte Platzhalter in der Testzeitraum-Beschreibung und HTML-Tags in übersetzbaren Hilfs- und Einrichtungstexten korrigiert.
+* Tests: Prüfung der englischen Sprachkataloge auf Vollständigkeit, Platzhalter, Pluralformen und Übereinstimmung mit den kompilierten Sprachdateien ergänzt.
 
 = 1.0.2 =
 

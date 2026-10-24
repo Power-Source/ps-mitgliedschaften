@@ -2237,7 +2237,7 @@ class MS_Model_Relationship extends MS_Model_CustomPostType {
 					}
 				} else {
 					$trial_price 	= __( 'nichts', 'membership2' );
-					$lbl 			= __( 'Deine kostenlose Testversion von %1$ endet mit %5$ und dann wird Dir eine Rechnung ausgestellt.', 'membership2' );
+					$lbl 			= __( 'Deine kostenlose Testversion von %1$s endet mit %5$s und dann wird Dir eine Rechnung ausgestellt.', 'membership2' );
 				}
 			} else {
 				$trial_price 	= MS_Helper_Billing::format_price( $trial_price );
