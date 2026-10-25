@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: PS Mitgliedschaften
- * Plugin URI:  https://cp-psource.github.io/mitgliedschaften-pro/
+ * Plugin URI:  https://psource.eimen.net/psource/ps-mitgliedschaften/
  * Version:     1.0.3
  * Description: Das leistungsstärkste, benutzerfreundlichste und flexibelste Mitgliedschafts-Plugin für ClassicPress-Seiten.
  * Requires at least: 4.6

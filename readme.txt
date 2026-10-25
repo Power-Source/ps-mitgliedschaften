@@ -28,8 +28,11 @@ Nutze die Möglichkeit dazu auf GitHub oder sende Deine Dateien an: webmaster@n3
 
 == ChangeLog ==
 
-= 1.0.3 =
+= 1.0.4 =
 
+* Fix: PHP-Deprecation-Warnungen bei Cron- und Besucheranfragen behoben, die durch null als Array-Index im Benutzer-Cache ausgelöst wurden.
+
+= 1.0.3 =
 * Sicherheit: Weiterleitungsvalidierung beim Ajax-Login, beim Löschen mehrerer Mitgliedschaften und bei der Netzwerkauswahl korrigiert. Nur HTTP(S)-Ziele derselben Herkunft werden zugelassen; Pfade mit doppeltem Schrägstrich können keine externe Weiterleitung mehr auslösen.
 * Tests: Regressionstests für gültige und ungültige Weiterleitungen in Quell- und minimierten Skripten ergänzt.
 * Übersetzungen: Englische Sprachkataloge (USA und Großbritannien) mit dem aktuellen Quellcode abgeglichen, Übersetzungen geprüft und ergänzt sowie die kompilierten Sprachdateien aktualisiert.
@@ -37,15 +40,12 @@ Nutze die Möglichkeit dazu auf GitHub oder sende Deine Dateien an: webmaster@n3
 * Tests: Prüfung der englischen Sprachkataloge auf Vollständigkeit, Platzhalter, Pluralformen und Übereinstimmung mit den kompilierten Sprachdateien ergänzt.
 
 = 1.0.2 =
-
 * Fix: Konflikt im Registrierungsformular behoben, der in Kombination mit externen register_form-Hooks zu doppelten Passwortfeldern fuehren konnte.
 * Fix: reCaptcha-Validierung im Registrierungsablauf stabilisiert und Integrationsverhalten zwischen reCaptcha-Add-ons verbessert.
 * Fix: Pointer-Polyfill hinzugefügt und die Skripte und Stile für verbesserte Benutzerführung aktualisiert
 
 = 1.0.1 =
-
 * Security Fixes
 
 = 1.0.0 =
-
 * Release 

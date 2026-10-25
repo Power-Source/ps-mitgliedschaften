@@ -678,8 +678,9 @@ class MS_Model_Member extends MS_Model {
 	 */
 	static public function is_admin_user( $user_id = false ) {
 		$cache_result = true;
+		$cache_key = null === $user_id ? '' : $user_id;
 
-		if ( ! isset( self::$_is_admin_user[ $user_id ] ) ) {
+		if ( ! isset( self::$_is_admin_user[ $cache_key ] ) ) {
 			$is_admin 			= false;
 			$default_user_id 	= null;
 
@@ -733,11 +734,11 @@ class MS_Model_Member extends MS_Model {
 				self::$_is_admin_user[ $user_id ] = $is_admin;
 
 				if ( null !== $default_user_id ) {
-					self::$_is_admin_user[ $default_user_id ] = $is_admin;
+					self::$_is_admin_user[ $cache_key ] = $is_admin;
 				}
 			}
 		} else {
-			$is_admin = self::$_is_admin_user[ $user_id ];
+			$is_admin = self::$_is_admin_user[ $cache_key ];
 		}
 
 		return $is_admin;
@@ -753,17 +754,19 @@ class MS_Model_Member extends MS_Model {
 	 * @return boolean
 	 */
 	static public function is_normal_admin( $user_id = false ) {
-		if ( ! isset( self::$_is_normal_admin[$user_id] ) ) {
+		$cache_key = null === $user_id ? '' : $user_id;
+
+		if ( ! isset( self::$_is_normal_admin[ $cache_key ] ) ) {
 			$res = self::is_admin_user( $user_id )
 				&& ! MS_Factory::load( 'MS_Model_Simulate' )->is_simulating();
-			self::$_is_normal_admin[$user_id] = $res;
+			self::$_is_normal_admin[ $cache_key ] = $res;
 
 			if ( empty( $user_id ) ) {
 				self::$_is_normal_admin[ get_current_user_id() ] = $res;
 			}
 		}
 
-		return self::$_is_normal_admin[$user_id];
+		return self::$_is_normal_admin[ $cache_key ];
 	}
 
 	/**
@@ -776,17 +779,19 @@ class MS_Model_Member extends MS_Model {
 	 * @return boolean
 	 */
 	static public function is_simulated_user( $user_id = false ) {
-		if ( ! isset( self::$_is_simulated_user[$user_id] ) ) {
+		$cache_key = null === $user_id ? '' : $user_id;
+
+		if ( ! isset( self::$_is_simulated_user[ $cache_key ] ) ) {
 			$res = self::is_admin_user( $user_id )
 				&& MS_Factory::load( 'MS_Model_Simulate' )->is_simulating();
-			self::$_is_simulated_user[$user_id] = $res;
+			self::$_is_simulated_user[ $cache_key ] = $res;
 
 			if ( empty( $user_id ) ) {
 				self::$_is_simulated_user[ get_current_user_id() ] = $res;
 			}
 		}
 
-		return self::$_is_simulated_user[$user_id];
+		return self::$_is_simulated_user[ $cache_key ];
 	}
 
 	/**
