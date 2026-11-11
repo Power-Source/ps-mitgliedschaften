@@ -28,13 +28,12 @@ Nutze die Möglichkeit dazu auf GitHub oder sende Deine Dateien an: webmaster@n3
 
 == ChangeLog ==
 
+
+= 1.0.4 =
+* Fix: PHP-Deprecation-Warnungen bei Cron- und Besucheranfragen behoben, die durch null als Array-Index im Benutzer-Cache ausgelöst wurden.
 * Neu: Das manuelle Überweisungs-Gateway unterstützt Kontoinhaber, IBAN, BIC, Bankname und einen automatisch um die Rechnungsnummer ergänzten Verwendungszweck.
 * Neu: Für gültige Euro-Überweisungen wird ein lokal erzeugter EPC-QR-Code angezeigt und in die Überweisungs-E-Mail eingebettet; er übergibt Empfänger, Betrag und Verwendungszweck an Banking-Apps.
 * Technik: Die QR-Code-Bibliothek verwendet einen eigenen Composer-Loader, damit sie konfliktfrei neben anderen Plugins und deren Abhängigkeiten geladen wird.
-
-= 1.0.4 =
-
-* Fix: PHP-Deprecation-Warnungen bei Cron- und Besucheranfragen behoben, die durch null als Array-Index im Benutzer-Cache ausgelöst wurden.
 
 = 1.0.3 =
 * Sicherheit: Weiterleitungsvalidierung beim Ajax-Login, beim Löschen mehrerer Mitgliedschaften und bei der Netzwerkauswahl korrigiert. Nur HTTP(S)-Ziele derselben Herkunft werden zugelassen; Pfade mit doppeltem Schrägstrich können keine externe Weiterleitung mehr auslösen.

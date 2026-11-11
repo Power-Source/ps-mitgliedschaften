@@ -5,8 +5,8 @@
  * Version:     1.0.4
  * Description: Das leistungsstärkste, benutzerfreundlichste und flexibelste Mitgliedschafts-Plugin für ClassicPress-Seiten.
  * Requires at least: 4.6
- * Tested up to: 6.8.1
- * ClassicPress: 2.7.0
+ * Tested up to: 7.0.4
+ * ClassicPress: 2.7.4
  * Author:      PSOURCE
  * Author URI:  https://github.com/cp-psource/
  * License:     GPL2
