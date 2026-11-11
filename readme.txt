@@ -4,7 +4,7 @@ Tags: classicpress-plugin, classicpress, membership, multisite
 Requires at least: 4.9
 Tested up to: 7.1 
 ClassicPress 2.7.4
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -27,6 +27,10 @@ Du kannst uns gerne Deine optimierten .po/.mo Dateien für Deine Muttersprache z
 Nutze die Möglichkeit dazu auf GitHub oder sende Deine Dateien an: webmaster@n3rds.work
 
 == ChangeLog ==
+
+* Neu: Das manuelle Überweisungs-Gateway unterstützt Kontoinhaber, IBAN, BIC, Bankname und einen automatisch um die Rechnungsnummer ergänzten Verwendungszweck.
+* Neu: Für gültige Euro-Überweisungen wird ein lokal erzeugter EPC-QR-Code angezeigt und in die Überweisungs-E-Mail eingebettet; er übergibt Empfänger, Betrag und Verwendungszweck an Banking-Apps.
+* Technik: Die QR-Code-Bibliothek verwendet einen eigenen Composer-Loader, damit sie konfliktfrei neben anderen Plugins und deren Abhängigkeiten geladen wird.
 
 = 1.0.4 =
 
